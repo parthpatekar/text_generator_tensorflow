@@ -54,7 +54,7 @@ def RNN(x, weights, biases):
     x = tf.split(x,batch_size,1)
 
     #initialize lstm-rnn
-    rnn_cell = rnn.MultiRNNCell([rnn.BasicLSTMCell(n_hidden),rnn.BasicLSTMCell(n_hidden)])
+    rnn_cell = rnn.MultiRNNCell([rnn.BasicLSTMCell(batch_size),rnn.BasicLSTMCell(n_hidden)])
     outputs, states = rnn.static_rnn(rnn_cell, x, dtype=tf.float32)
     #return last of the produced output and multiply with weights and add biases
     return tf.matmul(outputs[-1], weights) + biases
